@@ -1,3 +1,7 @@
-from django.contrib import admin
+from django.contrib.admin import ModelAdmin, register
+from .models import Trip
 
-# Register your models here.
+
+@register(Trip)
+class TripAdmin(ModelAdmin):
+    pass
