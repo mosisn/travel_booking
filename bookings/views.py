@@ -7,13 +7,14 @@ def list_trip(request):
     context = {
         'trips' : trips
     }
-    return render(request, 'templates/trip_list.html', context)
+    return render(request, 'list_trip.html', context)
 
 def create_trip(request):
     if request.method == 'POST':
         form = TripForm(request.POST)
         if form.is_valid():
             form.save()
+        return redirect('list_trip')
     else:
         form = TripForm()
         return render(request, 'create_trip.html', {'form' : form})
@@ -27,7 +28,7 @@ def update_trip(request, trip_id):
         return redirect('list_trip')
     else:
         form = TripForm(instance=trip)
-        return render(request, 'templates/update_trip.html', {'form':form})
+        return render(request, 'update_trip.html', {'form':form})
 
 def delete_trip(request, trip_id):
     trip = get_object_or_404(Trip, id=trip_id)
